@@ -1,0 +1,69 @@
+.category {
+    padding: 30px 0;
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+    }
+
+    &__item {
+        height: 200px;
+        border-radius: 8px;      
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        padding-left: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        align-items: flex-end;
+        transition: all 0.4s;
+        overflow: hidden;
+
+        &-1 {
+            background-image: url("../../img/chiken.jpg");
+            grid-column-end: span 2;
+        }
+        &-2 {
+            background-image: url("../../img/coal.jpg");
+        }
+        &-3 {
+            background-image: url("../../img/carn.jpg");
+        }
+        &-4 {
+            background-image: url("../../img/pizza.jpg");
+            grid-column-end: span 2;
+        }
+        &-5 {
+            background-image: url("../../img/fish.jpg");
+            grid-column-end: span 2;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(0,0,0);
+            background: linear-gradient(13deg, rgba(0,0,0,0.7) 0%, rgba(176,176,176,0.1) 63%, rgba(255,255,255,0.2) 100%);
+            transition: all 0.4s;
+        }
+       
+        &:hover {         
+
+          &::before {
+            background: rgba(0,0,0,0.1);
+            transition: all 0.4s;
+          }
+        }
+    }
+
+    &__name {
+        color: var(--white-color);
+        font-size: 24px;
+        font-weight: 700;
+        z-index: 5;
+    }
+}

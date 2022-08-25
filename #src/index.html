@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/style.min.css">
+
     
     </script>
-    <title>Landing2</title>
+    <title>Delivery</title>
 </head>
 <body>
     <div class="site-container">
@@ -19,23 +24,17 @@
             </button>
             <nav class="menu__nav">
                 <ul class="menu__list">
-                    <li class="menu__item"><a href="#" class="menu__link">Become A Travel</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Feaatured Stories</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Featured Videos</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Newsletter</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Inspirations</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Contacts</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Роллы</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
                 </ul>
             </nav>
         </div>
         @@include('_header.html',{})
         <main>
             @@include('_first.html',{})
-            @@include('_become.html',{})
-            @@include('_featured.html',{})
-            @@include('_featured-videos.html',{})
-            @@include('_newsletter.html',{})
-            @@include('_insp.html',{})
+            @@include('_category.html',{})
+            @@include('_products.html',{})
         </main>
         @@include('_footer.html',{})
     </div>

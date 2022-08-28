@@ -220,3 +220,61 @@ window.addEventListener("click", function (event) {
     calcCartPrice();
   }
 });
+
+
+//=======yadex_maps=========
+
+ymaps.ready(init);
+function init() {
+  var myMap = new ymaps.Map("map", {
+    center: [55.76, 37.64],
+    zoom: 7,
+    controls: ["zoomControl"],
+    behaviors: ["drag"],
+  });
+  //============ IconPlacemark ===============
+
+  //    MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+  //     '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+  // ),
+
+  //============ geoObject ==================
+  var myadress = document.querySelector(".myadress").innerHTML;
+  ymaps
+    .geocode(myadress, {
+      results: 1,
+    })
+    .then(function (res) {
+      var firstGeoObject = res.geoObjects.get(0),
+        coords = firstGeoObject.geometry.getCoordinates(),
+        bounds = firstGeoObject.properties.get("boundedBy");
+      firstGeoObject.options.set(
+        "preset",
+        "islands#darkBlueDotIconWithCaption"
+      );
+      firstGeoObject.properties.set(
+        "iconCaption",
+        firstGeoObject.getAddressLine()
+      );
+      (myPlacemark = new ymaps.Placemark(
+        firstGeoObject.geometry.getCoordinates(),
+        {
+          hintContent: "Собственный значок метки",
+          balloonContent: "Это красивая метка",
+        },
+        {
+          iconLayout: "default#image",
+          // iconImageHref: "../img/icon.png",
+          iconImageSize: [60, 60],
+          iconImageOffset: [-40, -38],
+        }
+      )),
+        myMap.geoObjects.add(myPlacemark);
+
+      myMap.setBounds(bounds, {
+        checkZoomRange: true,
+      });
+    });
+}
+
+//====================/yandexMaps=======================

@@ -1,0 +1,47 @@
+.contacts {
+    padding: 50px 0;
+
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__start {
+        width: 50%;
+    }
+
+    &__map  {
+        height: 450px;
+        background-color: #fef0b6;
+    }
+
+    &__info {
+        width: 50%;
+        padding-left: 30px;
+       
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 900;
+        font-family: "Montserrat", sans-serif;
+        margin-bottom: 5px;
+    }
+
+    &__descr {
+        margin-bottom: 30px;
+    }
+
+    &__phone {
+        margin-bottom: 30px;
+        display: block;
+    }
+
+}
+
+.social {
+
+    &__list {
+        display: flex; 
+    }
+}

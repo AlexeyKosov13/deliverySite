@@ -27,10 +27,14 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .section-title {
-	font-weight: 700;
-	font-size: 64px;
-	line-height: 80px;
-	color: var(--dark-color);
+	font-weight: 900;
+	font-size: 46px;
+	font-family: 'Montserrat', sans-serif;
+	line-height: 40px;
+	color: var(--accent-color);
+	padding-bottom: 40px;
+	text-align: center;
+
 }
 
 .section-title--center {

@@ -1,6 +1,6 @@
 .footer {
     border-top: 1px solid #d9d9d9;
-    padding-top: 100px;
+    padding: 30px 0;
 
     &__title {
         font-family: 'Helvetica', sans-serif;
@@ -30,7 +30,6 @@
         font-size: 13px;
         color: #959EA6;
         display: inline-block;
-        margin-bottom: 10px;
         transition: color 0.3s;
 
         &:hover {
@@ -41,6 +40,7 @@
 
     &__links {
         display: flex;
+        align-items: center;
 
         &-item {
             margin-left: 30px;
@@ -48,14 +48,9 @@
         }
     }
 
-    &__bottom {
-        border-top: 1px solid #d9d9d9;
-        padding: 30px 0;
-    }
-
     &__container {
         justify-content: space-between;
-        padding-bottom: 120px;
+        align-items: center;
     
     }
 
@@ -64,32 +59,6 @@
         font-size: 13px;
         line-height: 15px;
         color: #959EA6;
-    }
-}
-
-.subs-form {
-    width: 360px;
-
-    &__field {
-        width: 100%;
-        height: 64px;
-        border-radius: 8px;
-        border: 1px solid #e4e4e4;
-        padding-left: 30px;
-        background-position: calc(100% - 30px) center;
-        background-repeat: no-repeat;
-    }
-
-    &__btn {
-        width: 100%;
-        background-color: var(--neptune-color);
-        margin-top: 15px;
-        transition: background-color 0.3s;
-
-        &:hover {
-            transition: background-color 0.3s;
-            background-color: var(--neptune-hover-color);
-        }
     }
 }
 

@@ -30,46 +30,6 @@
         "weight": 230,
         "price": 320,
         "imgSrc":"philadelphia.jpg" 
-    },
-    {   
-        "id": 5,
-        "title": "Филадельфия",
-        "itemsInBox": 6,
-        "weight": 230,
-        "price": 320,
-        "imgSrc":"philadelphia.jpg" 
-    },
-    {   
-        "id": 6,
-        "title": "Филадельфия",
-        "itemsInBox": 6,
-        "weight": 230,
-        "price": 320,
-        "imgSrc":"philadelphia.jpg" 
-    },
-    {   
-        "id": 7,
-        "title": "Филадельфия",
-        "itemsInBox": 6,
-        "weight": 230,
-        "price": 320,
-        "imgSrc":"philadelphia.jpg" 
-    },
-    { 
-        "id": 8,
-        "title": "Калифорния темпура",
-        "itemsInBox": 6,
-        "weight": 205,
-        "price": 250,
-        "imgSrc": "california-tempura.jpg" 
-    },
-    { 
-        "id": 9,
-        "title": "Калифорния темпура",
-        "itemsInBox": 6,
-        "weight": 205,
-        "price": 250,
-        "imgSrc": "california-tempura.jpg" 
     }
     
 ]

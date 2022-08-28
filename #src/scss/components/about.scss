@@ -1,0 +1,41 @@
+.about {
+    color: var(--white-color);
+    background: linear-gradient(to top, #2d2c2c, #1f1f1f);
+    position: relative;
+
+    &__img-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;   
+        object-fit: cover;
+        background: linear-gradient( rgba(34, 32, 32, 0.8), rgba(0, 0, 0, 0.5) ), url('/img/about-bg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+    }
+
+    &__container {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        padding: 130px 0 130px 100px;
+    }
+
+    &__wrapper {
+        width: 50%;
+    }
+
+    &__title {
+        text-align: left;
+        padding-bottom: 20px;
+        color: var(--white-color);
+    }
+
+    &__descr {
+        width: 80%;
+        line-height: 20px;
+        font-size: 18px;
+    }
+}

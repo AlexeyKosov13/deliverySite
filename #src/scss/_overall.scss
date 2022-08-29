@@ -51,3 +51,18 @@ input[type="search"]::-webkit-search-results-decoration {
 	color: var(--white-color);
 	padding: 23px 70px;
 }
+
+.phone-btn {
+		display: inline-block;
+        padding: 10px 30px;
+        border-radius: 20px;
+		color: var(--white-color);
+        border: 2px solid var(--white-color);
+        font-weight: 900;
+        transition: all 0.3s;
+		
+        &:hover {
+            background-color: rgba(255,255,255, 0.3);
+            transition: all 0.3s;
+        }
+}

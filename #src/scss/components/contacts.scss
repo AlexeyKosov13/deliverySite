@@ -4,6 +4,20 @@
     &__container {
         display: flex;
         align-items: center;
+        position: relative;
+
+        &::before {
+            content: '';        
+            position: absolute;
+            width: 500px;
+            height: 300px;
+            background-size:cover;
+            z-index: -1;
+            right: -50px;
+            bottom: -50px;
+            background-image: url("../../img/contacts-bg.png");
+            background-repeat: no-repeat;
+        }
     }
 
     &__start {
@@ -44,4 +58,35 @@
     &__list {
         display: flex; 
     }
+
+
+    &__item:not(:last-child) {
+        margin-right: 7px;
+    }
+
+    &__link {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        &--inst {  
+            background-image: url(../../img/social/instagram.svg);
+        }
+
+        &--fb {
+            background-image: url(../../img/social/fb.svg);
+        }
+
+        &--vk {
+            background-image: url(../../img/social/vk.svg);
+        }
+    }
+}
+
+#map {
+    width: 100%;
+    height: 100%;
 }

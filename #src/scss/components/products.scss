@@ -13,6 +13,10 @@
 	
 	}
 
+	&__cart {
+		width: 23%;
+	}
+
     &__list {
         display: flex;
         margin-bottom: 50px;
@@ -53,7 +57,7 @@
 	}
 
     &__items {
-        width: 80%;
+        width: 75%;
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
@@ -73,6 +77,10 @@
     &__body {
         max-width: 270px;
     }
+
+	&__title {
+		font-size: 18px;
+	}
 }
 
 .product-img {
@@ -227,9 +235,18 @@
 	margin-left: 15px;
 }
 
-.cart-total {
-	font-size: 18px;
+.cart__total {
+	font-size: 24px;
 	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+
+
+.small {
+	display: inline-block;
+	font-size: 12px;
+	margin-bottom: 20px;
 }
 
 .delivery-cost {

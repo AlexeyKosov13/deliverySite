@@ -1,35 +1,43 @@
-
 const burger = document.querySelector(".burger");
+const order = document.querySelector(".order");
 const close = document.querySelector(".menu__close");
+const closeOrder = document.querySelector(".menuOrder__close");
 const menu = document.querySelector(".menu");
+const menuOrder = document.querySelector(".menu__order");
 
-
-burger.addEventListener('click', () => {
-    menu.classList.add('menu--visible');
+burger.addEventListener("click", () => {
+  menu.classList.add("menu--visible");
 });
 
-close.addEventListener('click', () => {
-    menu.classList.remove('menu--visible');
+close.addEventListener("click", () => {
+  menu.classList.remove("menu--visible");
 });
 
+order.addEventListener("click", () => {
+  menuOrder.classList.add("menu__order--visible");
+});
+
+closeOrder.addEventListener("click", () => {
+  menuOrder.classList.remove("menu__order--visible");
+});
 
 //======card=======
 
-const productsContainer = document.querySelector('.products__items');
+const productsContainer = document.querySelector(".products__items");
 
-getProducts()
+getProducts();
 
 async function getProducts() {
-  const response = await fetch('./js/products.json');
+  const response = await fetch("./js/products.json");
   const productsArray = await response.json();
   renderProducts(productsArray);
-};
+}
 
 function renderProducts(productsArray) {
   productsArray.forEach(function (item) {
     const productHTML = `
-    <div class="products__item">
-    <div class="products__wrapper" data-id="${item.id}">
+    <div class="products__item ">
+    <div class="products__wrapper card" data-id="${item.id}">
       <img class="product-img" src="img/roll/${item.imgSrc}" alt="">
       <div class="card__body text-center">
         <h4 class="item-title">${item.title}</h4>
@@ -54,13 +62,12 @@ function renderProducts(productsArray) {
     </div>
   </div>
     `;
-    productsContainer.insertAdjacentHTML('beforeend', productHTML);
-  })
-};
-
+    productsContainer.insertAdjacentHTML("beforeend", productHTML);
+  });
+}
 
 function toggleCartStatus() {
-  const cartWrapper = document.querySelector(".cart-wrapper");
+  const cartWrapper = document.querySelector(".products__cart");
   const cartEmptyBadge = document.querySelector("[data-cart-empty]");
   const orderForm = document.querySelector("#order-form");
 
@@ -93,9 +100,9 @@ function calcCartPrice() {
 
   //скрываем или показываем блок со стоимостью доставки
   if (totalPrice > 0) {
-    cartDelivery.classList.remove('none');
+    cartDelivery.classList.remove("none");
   } else {
-    cartDelivery.classList.add('none');
+    cartDelivery.classList.add("none");
   }
 
   if (totalPrice >= 600) {
@@ -105,7 +112,7 @@ function calcCartPrice() {
     deliveryCost.classList.remove("free");
     deliveryCost.innerText = "250 ₽";
   }
-};
+}
 
 window.addEventListener("click", function (event) {
   // обьявляем переменную для счетчика
@@ -152,6 +159,7 @@ window.addEventListener("click", function (event) {
 });
 
 const cartWrapper = document.querySelector(".cart-wrapper");
+const orderWrapper = document.querySelector(".order-wrapper");
 
 window.addEventListener("click", function (event) {
   // проверяем что  клик по кнопке добавить в карзину
@@ -190,9 +198,7 @@ window.addEventListener("click", function (event) {
                         <div class="cart-item__title">${productInfo.title}</div>
                         <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
 
-                        <!-- cart-item__details -->
                         <div class="cart-item__details">
-
                             <div class="items items--small counter-wrapper">
                                 <div class="items__control" data-action="minus">-</div>
                                 <div class="items__current" data-counter="">${productInfo.counter}</div>
@@ -202,14 +208,12 @@ window.addEventListener("click", function (event) {
                             <div class="price">
                                 <div class="price__currency">${productInfo.price}</div>
                             </div>
-
                         </div>
-                        <!-- // cart-item__details -->
-
                     </div>
                 </div>
             </div>`;
       cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
+      orderWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
     }
     //сброс счетчика на 1
     card.querySelector("[data-counter]").innerText = "1";
@@ -221,60 +225,48 @@ window.addEventListener("click", function (event) {
   }
 });
 
-
 //=======yadex_maps=========
+
+//============ geoObject ==================
 
 ymaps.ready(init);
 function init() {
+  // Создание карты.
   var myMap = new ymaps.Map("map", {
-    center: [55.76, 37.64],
-    zoom: 7,
-    controls: ["zoomControl"],
-    behaviors: ["drag"],
+    center: [56, 37],
+    zoom: 12,
   });
-  //============ IconPlacemark ===============
 
-  //    MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-  //     '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-  // ),
+  // Строка с адресом, который необходимо геокодировать
+  var address = document.querySelector("#myadress").innerHTML;
 
-  //============ geoObject ==================
-  var myadress = document.querySelector(".myadress").innerHTML;
-  ymaps
-    .geocode(myadress, {
-      results: 1,
-    })
-    .then(function (res) {
-      var firstGeoObject = res.geoObjects.get(0),
-        coords = firstGeoObject.geometry.getCoordinates(),
-        bounds = firstGeoObject.properties.get("boundedBy");
-      firstGeoObject.options.set(
-        "preset",
-        "islands#darkBlueDotIconWithCaption"
-      );
-      firstGeoObject.properties.set(
-        "iconCaption",
-        firstGeoObject.getAddressLine()
-      );
-      (myPlacemark = new ymaps.Placemark(
-        firstGeoObject.geometry.getCoordinates(),
-        {
-          hintContent: "Собственный значок метки",
-          balloonContent: "Это красивая метка",
-        },
-        {
-          iconLayout: "default#image",
-          // iconImageHref: "../img/icon.png",
-          iconImageSize: [60, 60],
-          iconImageOffset: [-40, -38],
-        }
-      )),
-        myMap.geoObjects.add(myPlacemark);
-
-      myMap.setBounds(bounds, {
-        checkZoomRange: true,
-      });
+  // Ищем координаты указанного адреса
+  // https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/geocode-docpage/
+  var geocoder = ymaps.geocode(address);
+  //   myMap.setCenter(geocoder, 3, {
+  //     checkZoomRange: true
+  // });
+  // После того, как поиск вернул результат, вызывается callback-функция
+  geocoder.then(function (res) {
+    // координаты объекта
+    var coordinates = res.geoObjects.get(0).geometry.getCoordinates();
+    console.log(coordinates);
+    myMap.setCenter(coordinates, 14, {
+      checkZoomRange: true,
     });
-}
+    // Добавление метки (Placemark) на карту
+    var placemark = new ymaps.Placemark(
+      coordinates,
+      {
+        hintContent: address,
+        balloonContent: "Время работы: Пн-Пт, с 9 до 20",
+      },
+      {
+        preset: "islands#redDotIcon",
+      }
+    );
 
+    myMap.geoObjects.add(placemark);
+  });
+}
 //====================/yandexMaps=======================

@@ -17,46 +17,76 @@
 </head>
 <body>
     <div class="site-container">
-        <div class="menu">
-            <button class="menu__close btn-reset" aria-label="close menu">
-                <span class="menu__close-line"></span>
-                <span class="menu__close-line"></span>
-            </button>
-            <nav class="menu__nav">
-                <ul class="menu__list">
-                    <li class="menu__item"><a href="#" class="menu__link">Роллы</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
-                </ul>
-                <a href="tel:+7999999999" class="phone-btn menu__phone">+7(999)990-09-99</a>
-                <ul class="social__list">
-                    <li class="social__item">
-                      <a href="#" target="_blank" class="social__link social__link--vk">
-                      </a>
-                    </li>
-                    
-                    <li class="social__item">
-                      <a
-                        href="#"
-                        target="_blank"
-                        class="social__link social__link--inst"
-                        >
-                        </a>
-                    </li>
-                    
-                    <li class="social__item">
-                      <a href="#" target="_blank" class="social__link social__link--fb"></a>
-                    </li>
-                  </ul>
-            </nav>
+        <div class="popup popup--hide">
+    <div class="popup__wrapper">
+        <div class="popup__inner">
+            <div class="popup__content">
+                <button class="menu__close btn-reset" aria-label="close popup">
+                    <span class="menu__close-line"></span>
+                    <span class="menu__close-line"></span>
+                </button>
+                <div class="popup__info">
+                    <h2 class="popup__title section-title">Заказ принят</h2>
+                    <p class="popup__descr">Мы уже начали готовить ваши роллы</p>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+        <div class="menu">
+    <button class="menu__close btn-reset" aria-label="close menu">
+        <span class="menu__close-line"></span>
+        <span class="menu__close-line"></span>
+    </button>
+    <nav class="menu__nav">
+        <ul class="menu__list">
+            <li class="menu__item"><a href="#" class="menu__link">Роллы</a></li>
+            <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
+            <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
+        </ul>
+        <a href="tel:+7999999999" class="phone-btn menu__phone">+7(999)990-09-99</a>
+        <ul class="social__list">
+            <li class="social__item">
+              <a href="#" target="_blank" class="social__link social__link--vk">
+              </a>
+            </li>
+            
+            <li class="social__item">
+              <a
+                href="#"
+                target="_blank"
+                class="social__link social__link--inst"
+                >
+                </a>
+            </li>
+            
+            <li class="social__item">
+              <a href="#" target="_blank" class="social__link social__link--fb"></a>
+            </li>
+          </ul>
+    </nav>
+</div>
         <div class="menu__order">
     <button class="menuOrder__close btn-reset" aria-label="close menu">
         <span class="menuOrder__close-line"></span>
         <span class="menuOrder__close-line"></span>
     </button>
-    <h2></h2>
-    <div class="order-wrapper"></div>
+    <h2 class="order__title-h2">Ваш заказ:</h2>
+    <div class="order-wrapper">
+        <div class="order__list"></div>
+        <div class="order__total-price"></div>
+        <form action="#" class="order__form">
+            <h3 class="order__title-h3">Заполните форму: </h3>
+            <input type="text" placeholder="Имя" required class="order__input">
+            <input type="text" placeholder="Телефон" required class="order__input">
+            <input type="text" placeholder="Адрес" required class="order__input">
+            <select name="payment" id="paymant" class="order__input">
+                <option value="Cash">Наличными</option>
+                <option value="Card">Картой</option>
+            </select>
+            <button type="submit" class="btn btn-reset order__btn">Отправить</button>
+        </form>
+    </div>
 </div>
         <header class="header">
     <div class="container header__container flex">
@@ -155,10 +185,7 @@
 					</div>				
 					<div id="order-form" class="card-body border-top none">				
 						<button type="submit" class="btn btn-block btn-outline-warning order">Оформить заказ</button>
-					</div>
-					
-
-			
+					</div>		
             </div>
         </div>
     </div>

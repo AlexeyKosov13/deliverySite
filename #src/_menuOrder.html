@@ -1,0 +1,22 @@
+<div class="menu__order">
+    <button class="menuOrder__close btn-reset" aria-label="close menu">
+        <span class="menuOrder__close-line"></span>
+        <span class="menuOrder__close-line"></span>
+    </button>
+    <h2 class="order__title-h2">Ваш заказ:</h2>
+    <div class="order-wrapper">
+        <div class="order__list"></div>
+        <div class="order__total-price"></div>
+        <form action="#" class="order__form">
+            <h3 class="order__title-h3">Заполните форму: </h3>
+            <input type="text" placeholder="Имя" required class="order__input">
+            <input type="text" placeholder="Телефон" required class="order__input">
+            <input type="text" placeholder="Адрес" required class="order__input">
+            <select name="payment" id="paymant" class="order__input">
+                <option value="Cash">Наличными</option>
+                <option value="Card">Картой</option>
+            </select>
+            <button type="submit" class="btn btn-reset order__btn">Отправить</button>
+        </form>
+    </div>
+</div>

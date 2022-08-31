@@ -3,27 +3,69 @@ const order = document.querySelector(".order");
 const close = document.querySelector(".menu__close");
 const closeOrder = document.querySelector(".menuOrder__close");
 const menu = document.querySelector(".menu");
+const popup = document.querySelector(".popup");
 const menuOrder = document.querySelector(".menu__order");
+const orderTotal = document.querySelector(".order__total-price");
+const cartWrapper = document.querySelector(".cart-wrapper");
+const orderWrapper = document.querySelector(".order__list");
+const orderBtn = document.querySelector(".order__btn");
+const productsContainer = document.querySelector(".products__items");
+
+let cart = [];
 
 burger.addEventListener("click", () => {
   menu.classList.add("menu--visible");
 });
 
+orderBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  menuOrder.classList.remove("menu__order--visible");
+  popup.classList.remove("popup--hide");
+  cartWrapper.innerHTML = "";
+  calcCartPrice();
+});
+
 close.addEventListener("click", () => {
   menu.classList.remove("menu--visible");
+  popup.classList.add("popup--hide");
 });
 
 order.addEventListener("click", () => {
   menuOrder.classList.add("menu__order--visible");
+
+  
+  cart.forEach((item) => {  
+    const cartItemHTML = `
+            <div class="cart-item order__item" data-id="${item.id}">
+                    <div class="cart-item__img order__img">
+                        <img src="${item.imgSrc}" alt="${item.title}">
+                    </div>
+                    <div class="cart-item__desc order__descr">
+                        <div class="cart-item__title">${item.title}</div>
+                        <div class="cart-item__weight">${item.itemsInBox} / ${item.weight}</div>
+
+                        <div class="cart-item__details">
+                            <div class="price">
+                                <div class="price__currency">${item.price}</div>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="order__total"> x ${item.counter}</div>
+            </div>`;
+    orderWrapper.insertAdjacentHTML("afterbegin", cartItemHTML);
+  });
 });
 
+//====закрытие окна заказа======
 closeOrder.addEventListener("click", () => {
   menuOrder.classList.remove("menu__order--visible");
+  orderWrapper.innerHTML = "";
+  orderTotal.innerHTML = "";
 });
 
 //======card=======
 
-const productsContainer = document.querySelector(".products__items");
+
 
 getProducts();
 
@@ -86,7 +128,10 @@ function calcCartPrice() {
   const cartItems = document.querySelectorAll(".cart-item");
   const deliveryCost = document.querySelector(".delivery-cost");
   const cartDelivery = document.querySelector("[data-cart-delivery]");
+ 
   let totalPrice = 0;
+
+  
 
   cartItems.forEach(function (item) {
     const amountEl = item.querySelector("[data-counter]");
@@ -97,6 +142,7 @@ function calcCartPrice() {
   });
   // отображаем цену на страницу
   totalWrapper.innerText = totalPrice;
+  orderTotal.innerText = `Итого: ${totalPrice} руб.`;
 
   //скрываем или показываем блок со стоимостью доставки
   if (totalPrice > 0) {
@@ -114,10 +160,16 @@ function calcCartPrice() {
   }
 }
 
+//добавление или уменьшение количества в корзине
+
 window.addEventListener("click", function (event) {
   // обьявляем переменную для счетчика
   let counter;
-
+  let productId; 
+  if (event.target.closest(".cart-wrapper")) {
+    productId = event.target.closest(".cart-item").dataset.id;
+  }; 
+  
   if (
     event.target.dataset.action === "plus" ||
     event.target.dataset.action === "minus"
@@ -130,6 +182,12 @@ window.addEventListener("click", function (event) {
 
   if (event.target.dataset.action === "plus") {
     counter.innerText = ++counter.innerText;
+    cart.map((item) => {
+      if (item.id === productId) {
+        item.counter++;
+        console.log(cart);
+      };
+    });
   }
   // проверка что клик был совершен по кнопке минус
   if (event.target.dataset.action === "minus") {
@@ -137,18 +195,28 @@ window.addEventListener("click", function (event) {
     if (parseInt(counter.innerText) > 1) {
       //изменяем текст в счетчике уменьшаем на 1
       counter.innerText = --counter.innerText;
+      cart.map((item) => {
+        if (item.id === productId) {
+          item.counter--;
+        };
+      });
     } else if (
       event.target.closest(".cart-wrapper") &&
       parseInt(counter.innerText) === 1
     ) {
       event.target.closest(".cart-item").remove();
+      cart.map((item, index) => {
+        if (item.id === productId) {
+          cart.splice(index, 1);
+        }
+      })
+
       toggleCartStatus();
       // пересчет общей стоимости товаров в корзине
       calcCartPrice();
     }
   }
 
-  //проверяем клик по + или - внутри корзины
   if (
     event.target.hasAttribute("data-action") &&
     event.target.closest(".cart-wrapper")
@@ -158,8 +226,7 @@ window.addEventListener("click", function (event) {
   }
 });
 
-const cartWrapper = document.querySelector(".cart-wrapper");
-const orderWrapper = document.querySelector(".order-wrapper");
+
 
 window.addEventListener("click", function (event) {
   // проверяем что  клик по кнопке добавить в карзину
@@ -176,15 +243,18 @@ window.addEventListener("click", function (event) {
       price: card.querySelector(".price__currency").innerText,
       counter: card.querySelector("[data-counter]").innerText,
     };
+
+    cart.push(productInfo);
+    
     // проверяем есть ли такой товар в корзине
-    const itemInCart = cartWrapper.querySelector(
-      `[data-id="${productInfo.id}"]`
-    );
+    const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
+   
     // если товар в корзине плюсуем количество
     if (itemInCart) {
       const counterEl = itemInCart.querySelector("[data-counter]");
-      counterEl.innerText =
-        parseInt(counterEl.innerText) + parseInt(productInfo.counter);
+      counterEl.innerText = parseInt(counterEl.innerText) + parseInt(productInfo.counter);
+     
+     
     } else {
       //если товара нет в корзине
 
@@ -213,7 +283,6 @@ window.addEventListener("click", function (event) {
                 </div>
             </div>`;
       cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
-      orderWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
     }
     //сброс счетчика на 1
     card.querySelector("[data-counter]").innerText = "1";
@@ -225,6 +294,8 @@ window.addEventListener("click", function (event) {
   }
 });
 
+
+
 //=======yadex_maps=========
 
 //============ geoObject ==================
@@ -233,7 +304,7 @@ ymaps.ready(init);
 function init() {
   // Создание карты.
   var myMap = new ymaps.Map("map", {
-    center: [56, 37],
+    center: [56.141051, 47.194952],
     zoom: 12,
   });
 
@@ -243,14 +314,11 @@ function init() {
   // Ищем координаты указанного адреса
   // https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/geocode-docpage/
   var geocoder = ymaps.geocode(address);
-  //   myMap.setCenter(geocoder, 3, {
-  //     checkZoomRange: true
-  // });
+ 
   // После того, как поиск вернул результат, вызывается callback-функция
   geocoder.then(function (res) {
     // координаты объекта
     var coordinates = res.geoObjects.get(0).geometry.getCoordinates();
-    console.log(coordinates);
     myMap.setCenter(coordinates, 14, {
       checkZoomRange: true,
     });
@@ -261,6 +329,18 @@ function init() {
         hintContent: address,
         balloonContent: "Время работы: Пн-Пт, с 9 до 20",
       },
+      {
+        // Опции.
+        // Необходимо указать данный тип макета.
+        iconLayout: 'default#image',
+        // Своё изображение иконки метки.
+        iconImageHref: '../img/icon.svg',
+        // Размеры метки.
+        iconImageSize: [30, 42],
+        // Смещение левого верхнего угла иконки относительно
+        // её "ножки" (точки привязки).
+        iconImageOffset: [-5, -38]
+    },
       {
         preset: "islands#redDotIcon",
       }

@@ -136,5 +136,15 @@
                 transform: rotate(-45deg);
             }
         }
+
+        &:hover {
+            transform: scale(1.1);
+            transition: all 0.3s;
+        }
+
+        &:active {
+            transform: scale(0.9);
+            transition: all 0.3s;
+        }
     }
 }

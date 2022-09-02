@@ -21,9 +21,9 @@
     <div class="popup__wrapper">
         <div class="popup__inner">
             <div class="popup__content">
-                <button class="menu__close btn-reset" aria-label="close popup">
-                    <span class="menu__close-line"></span>
-                    <span class="menu__close-line"></span>
+                <button class="menu__close btn-reset popup-close" aria-label="close popup">
+                    <span class="menu__close-line popup-close"></span>
+                    <span class="menu__close-line popup-close"></span>
                 </button>
                 <div class="popup__info">
                     <h2 class="popup__title section-title">Заказ принят</h2>
@@ -33,16 +33,16 @@
         </div>
     </div>
 </div>
-        <div class="menu">
-    <button class="menu__close btn-reset" aria-label="close menu">
-        <span class="menu__close-line"></span>
-        <span class="menu__close-line"></span>
+        <div class="menu popup-menu popup">
+    <button class=" menu__close btn-reset popup__btn-close popup-close" aria-label="close menu">
+        <span class="menu__close-line popup__btn-close popup-close"></span>
+        <span class="menu__close-line popup__btn-close popup-close"></span>
     </button>
     <nav class="menu__nav">
         <ul class="menu__list">
-            <li class="menu__item"><a href="#" class="menu__link">Роллы</a></li>
-            <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
-            <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
+            <li class="menu__item"><a href="#" class="menu__link popup-close" data-scroll-to = "products">Роллы</a></li>
+            <li class="menu__item"><a href="#" class="menu__link popup-close" data-scroll-to = "about">О нас</a></li>
+            <li class="menu__item"><a href="#" class="menu__link popup-close" data-scroll-to = "contacts">Контакты</a></li>
         </ul>
         <a href="tel:+7999999999" class="phone-btn menu__phone">+7(999)990-09-99</a>
         <ul class="social__list">
@@ -66,10 +66,10 @@
           </ul>
     </nav>
 </div>
-        <div class="menu__order">
-    <button class="menuOrder__close btn-reset" aria-label="close menu">
-        <span class="menuOrder__close-line"></span>
-        <span class="menuOrder__close-line"></span>
+        <div class="menu__order  popup-order popup">
+    <button class="menuOrder__close btn-reset popup__btn-close popup-close" aria-label="close menu">
+        <span class="menuOrder__close-line popup__btn-close popup-close"></span>
+        <span class="menuOrder__close-line popup__btn-close popup-close"></span>
     </button>
     <h2 class="order__title-h2">Ваш заказ:</h2>
     <div class="order-wrapper">
@@ -91,17 +91,17 @@
         <header class="header">
     <div class="container header__container flex">
         <a href="#" class="header-logo logo">
-            <img src="./img/logo.png" alt="logo" class="header-logo__img" width="50" height="50">
+            <img src="./img/logo.png" alt="logo" class="header-logo__img" ">
             <h2 class="header-logo__name">СушиУши</h2>
         </a>
         <div class="header__end">
             <ul class="header__list">
-                <li class="header__item"><a href="#" class="header__link">Роллы</a></li>
-                <li class="header__item"><a href="#" class="header__link">О нас</a></li>
-                <li class="header__item"><a href="#" class="header__link">Контакты</a></li>
+                <li class="header__item"><a href="#" class="header__link" data-scroll-to = "products">Роллы</a></li>
+                <li class="header__item"><a href="#" class="header__link" data-scroll-to = "about">О нас</a></li>
+                <li class="header__item"><a href="#" class="header__link" data-scroll-to = "contacts">Контакты</a></li>
             </ul>
             <a href="tel:+7999999999" class="header__phone phone-btn">+7(999)990-09-99</a>
-             <button class="header__burger burger btn-reset" aria-label="menu">
+             <button class="header__burger burger btn-reset" aria-label="menu" data-popup = "popup-menu">
                 <span class="burger__line"></span>
             </button>
         </div>
@@ -114,7 +114,7 @@
         <div class="first__info">
             <p class="first__descr">От японского мастера</p>
             <h1 class="first__title">Лучшие суши в Чебоксарах</h1>
-            <button class="btn  btn-reset first__btn" type="button">Выбрать</button>
+            <button class="btn  btn-reset first__btn" data-scroll-to = "products" type="button">Выбрать</button>
         </div>
    </div>
 </section>
@@ -136,22 +136,22 @@
         </div>
     </div>
 </section>
-            <section class="products">
+            <section class="products" >
     <div class="container">
         <h2 class="products__title section-title">Меню</h2>
         <nav class="products__nav">
             <ul class="products__list">
                 <li class="products__li">
-                    <button class="products__btn btn-reset is-active" type="button">Все</button>
+                    <button class="products__btn btn-reset is-active" data-filter="all" type="button">Все</button>
                 </li>
                 <li class="products__li">
-                    <button class="products__btn btn-reset" type="button">Роллы</button>
+                    <button class="products__btn btn-reset" data-filter="roll" type="button">Роллы</button>
                 </li>
                 <li class="products__li">
-                    <button class="products__btn btn-reset" type="button">Суши</button>
+                    <button class="products__btn btn-reset" data-filter="gukan" type="button">Гуканы</button>
                 </li>
                 <li class="products__li">
-                    <button class="products__btn btn-reset" type="button">Лапша</button>
+                    <button class="products__btn btn-reset" data-filter="pizza" type="button">Пицца</button>
                 </li>
             </ul>
         </nav>
@@ -184,7 +184,7 @@
 						</div>
 					</div>				
 					<div id="order-form" class="card-body border-top none">				
-						<button type="submit" class="btn btn-block btn-outline-warning order">Оформить заказ</button>
+						<button type="submit" class="btn btn-block btn-outline-warning order" data-popup = "popup-order">Оформить заказ</button>
 					</div>		
             </div>
         </div>
@@ -265,7 +265,8 @@
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=74d7086c-14b2-44bc-826c-7aae7d3e496f&lang=ru_RU" type="text/javascript"></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- <script src="/js/script.js"></script> -->
     
 </body>
 </html>

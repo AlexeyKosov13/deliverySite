@@ -1,19 +1,19 @@
-<section class="products">
+<section class="products" >
     <div class="container">
         <h2 class="products__title section-title">Меню</h2>
         <nav class="products__nav">
             <ul class="products__list">
                 <li class="products__li">
-                    <button class="products__btn btn-reset is-active" type="button">Все</button>
+                    <button class="products__btn btn-reset is-active" data-filter="all" type="button">Все</button>
                 </li>
                 <li class="products__li">
-                    <button class="products__btn btn-reset" type="button">Роллы</button>
+                    <button class="products__btn btn-reset" data-filter="roll" type="button">Роллы</button>
                 </li>
                 <li class="products__li">
-                    <button class="products__btn btn-reset" type="button">Суши</button>
+                    <button class="products__btn btn-reset" data-filter="gukan" type="button">Гуканы</button>
                 </li>
                 <li class="products__li">
-                    <button class="products__btn btn-reset" type="button">Лапша</button>
+                    <button class="products__btn btn-reset" data-filter="pizza" type="button">Пицца</button>
                 </li>
             </ul>
         </nav>
@@ -46,7 +46,7 @@
 						</div>
 					</div>				
 					<div id="order-form" class="card-body border-top none">				
-						<button type="submit" class="btn btn-block btn-outline-warning order">Оформить заказ</button>
+						<button type="submit" class="btn btn-block btn-outline-warning order" data-popup = "popup-order">Оформить заказ</button>
 					</div>		
             </div>
         </div>

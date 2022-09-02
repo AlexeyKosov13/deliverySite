@@ -66,3 +66,7 @@ input[type="search"]::-webkit-search-results-decoration {
             transition: all 0.3s;
         }
 }
+
+.no-scroll {
+	overflow: hidden;
+}

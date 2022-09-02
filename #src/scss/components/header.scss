@@ -1,5 +1,5 @@
 .header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -7,6 +7,7 @@
     background-color: rgba(11, 20, 25, 0.6);
     padding: 15px 0;
     color: var(--white-color);
+    transition: all 0.4s;
 
     &__container {
         justify-content: space-between;
@@ -111,5 +112,16 @@
         &::after {
             bottom: -10px;
         }
+    }
+}
+
+.header.is--active {
+    padding: 5px 0;
+    transition: all 0.4s;
+
+    .header-logo__img {
+        width: 30px;
+        height: 30px;
+        transition: all 0.4s;
     }
 }

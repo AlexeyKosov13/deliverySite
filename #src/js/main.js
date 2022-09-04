@@ -237,7 +237,6 @@
     for (let i = 0; i < productsItems.length; i++) {
       let currentItem = productsItems[i];
       if (currentItem.data === filterValue) {
-        console.log(currentItem);
         filterdItems.push(currentItem);
       };
     };
@@ -340,12 +339,12 @@ function calcCartPrice() {
 //добавление или уменьшение количества в корзине
 
 window.addEventListener("click", function (event) {
-  // обьявляем переменную для счетчика
+  
   let counter;
   let productId;
   if (event.target.closest(".cart-wrapper")) {
     productId = event.target.closest(".cart-item").dataset.id;
-  }
+  };
 
   if (
     event.target.dataset.action === "plus" ||
@@ -355,7 +354,7 @@ window.addEventListener("click", function (event) {
     const counterWrapper = event.target.closest(".counter-wrapper");
     // находим див с числом счетчика
     counter = counterWrapper.querySelector("[data-counter]");
-  }
+  };
 
   if (event.target.dataset.action === "plus") {
     counter.innerText = ++counter.innerText;
@@ -364,7 +363,7 @@ window.addEventListener("click", function (event) {
         item.counter++;
       }
     });
-  }
+  };
   // проверка что клик был совершен по кнопке минус
   if (event.target.dataset.action === "minus") {
     // проверяем чтобы счетчик был больше 1
@@ -425,6 +424,36 @@ window.addEventListener("click", function (event) {
       `[data-id="${productInfo.id}"]`
     );
 
+   const renderCart = (item) => {
+    
+       const cartItemHTML = `
+            <div class="cart-item" data-id="${item.id}">
+                <div class="cart-item__top">
+                    <div class="cart-item__img">
+                        <img src="${item.imgSrc}" alt="${item.title}">
+                    </div>
+                    <div class="cart-item__desc">
+                        <div class="cart-item__title">${item.title}</div>
+                        <div class="cart-item__weight">${item.itemsInBox} / ${item.weight}</div>
+
+                        <div class="cart-item__details">
+                            <div class="items items--small counter-wrapper">
+                                <div class="items__control" data-action="minus">-</div>
+                                <div class="items__current" data-counter="">${item.counter}</div>
+                                <div class="items__control" data-action="plus">+</div>
+                            </div>
+
+                            <div class="price">
+                                <div class="price__currency">${item.price}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+      cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
+    
+   };
+
     // если товар в корзине плюсуем количество
     if (itemInCart) {
       const counterEl = itemInCart.querySelector("[data-counter]");
@@ -432,32 +461,7 @@ window.addEventListener("click", function (event) {
         parseInt(counterEl.innerText) + parseInt(productInfo.counter);
     } else {
       //если товара нет в корзине
-
-      const cartItemHTML = `
-            <div class="cart-item" data-id="${productInfo.id}">
-                <div class="cart-item__top">
-                    <div class="cart-item__img">
-                        <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
-                    </div>
-                    <div class="cart-item__desc">
-                        <div class="cart-item__title">${productInfo.title}</div>
-                        <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
-
-                        <div class="cart-item__details">
-                            <div class="items items--small counter-wrapper">
-                                <div class="items__control" data-action="minus">-</div>
-                                <div class="items__current" data-counter="">${productInfo.counter}</div>
-                                <div class="items__control" data-action="plus">+</div>
-                            </div>
-
-                            <div class="price">
-                                <div class="price__currency">${productInfo.price}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-      cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
+      renderCart(productInfo);
     }
     //сброс счетчика на 1
     card.querySelector("[data-counter]").innerText = "1";

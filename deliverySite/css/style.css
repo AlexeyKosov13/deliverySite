@@ -1091,14 +1091,14 @@ input[type=search]::-webkit-search-results-decoration {
   transition: color 0.4s, background-color 0.4s, border-right-color 0.4s;
 }
 
-.products__btn:not(.is-active):hover {
+.products__btn:not(.is--active):hover {
   color: var(--white-color);
   background-color: var(--accent-color);
   border-right-color: var(--accent-color);
   transition: color 0.4s, background-color 0.4s, border-right-color 0.4s;
 }
 
-.products__btn.is-active {
+.products__btn.is--active {
   color: #fff;
   background-color: #1f1f1f;
   transition: color 0.2s, background-color 0.2s, border-right-color 0.2s;

@@ -1,160 +1,172 @@
 //=======headersmall======
-; (function () {
-    if (window.matchMedia('(max-width: 992px').matches) {
-        return;
-    } else {
-        let header = document.querySelector('.header');
-        window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 0) {
-            header.classList.add('is--active')
-        } else {
-            header.classList.remove('is--active')
-        }
+(function () {
+  if (window.matchMedia("(max-width: 992px").matches) {
+    return;
+  } else {
+    let header = document.querySelector(".header");
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 0) {
+        header.classList.add("is--active");
+      } else {
+        header.classList.remove("is--active");
+      }
     });
-    }
-    
+  }
 })();
-
 
 //====popup ======
 
-; (function () {
-    const body = document.querySelector('body');
+(function () {
+  const body = document.querySelector("body");
 
-    let closestAttr = (item, attr) => {
-        let node = item;
-        while (node) {
-            let attrValue = node.getAttribute(attr);
-            if (attrValue) {
-                return attrValue;
-            };
+  let closestAttr = (item, attr) => {
+    let node = item;
+    while (node) {
+      let attrValue = node.getAttribute(attr);
+      if (attrValue) {
+        return attrValue;
+      }
 
-            node = node.parentElement;
-        };
-        return null;
-    };
+      node = node.parentElement;
+    }
+    return null;
+  };
 
-    let closestItemByClass = (item, className) => {
-        let node = item;
-        while (node) {
-            if (node.classList.contains(className)) {
-                return node;
-            };
+  let closestItemByClass = (item, className) => {
+    let node = item;
+    while (node) {
+      if (node.classList.contains(className)) {
+        return node;
+      }
 
-            node = node.parentElement;
-            console.log(node);
-        };
-        return null;
-    };
+      node = node.parentElement;
+    }
+    return null;
+  };
 
-    const showPopup = (target) => {
-        target.classList.add("is--active");
-    };
+  const showPopup = (target) => {
+    target.classList.add("is--active");
+  };
 
-    const closePopup = (target) => {
-        target.classList.remove("is--active");
-    };
+  const closePopup = (target) => {
+    target.classList.remove("is--active");
+  };
 
-    const toggleScroll = () => {
-        body.classList.toggle("no-scroll");
+  const toggleScroll = () => {
+    body.classList.toggle("no-scroll");
+  };
+
+  body.addEventListener("click", (e) => {
+    let target = e.target;
+    let popupClass = closestAttr(target, "data-popup");
+
+    if (popupClass === null) {
+      return;
     }
 
-    body.addEventListener('click', (e) => {
-        let target = e.target;
-        let popupClass = closestAttr(target, 'data-popup');
+    e.preventDefault();
+    let popup = document.querySelector(`.${popupClass}`);
 
-        if (popupClass === null) {
-            return;
-        }
+    if (popup) {
+      showPopup(popup);
+      toggleScroll();
+    }
+  });
 
-        e.preventDefault();
-        let popup = document.querySelector(`.${popupClass}`);
+  body.addEventListener("keydown", (e) => {
+    if (e.keyCode !== 27) {
+      return;
+    }
 
-        if (popup) {
-            showPopup(popup);
-            toggleScroll();
-        }
-    });
+    let popup = document.querySelector(".popup");
 
-    body.addEventListener('keydown', (e) => {
-        if (e.keyCode !== 27) {
-            return;
-        }
+    if (popup) {
+      closePopup(popup);
+      toggleScroll();
+    }
+  });
 
-        let popup = document.querySelector(".popup");
+  body.addEventListener("click", (e) => {
+    const target = e.target;
 
-        if (popup) {
-            closePopup(popup);
-            toggleScroll();
-        }
-    });
-
-    body.addEventListener('click', (e) => {
-        const target = e.target;
-
-        if (target.classList.contains("popup-close") || target.classList.contains("popup__inner")) {
-            const popup = closestItemByClass(target, "popup");
-            closePopup(popup);
-            toggleScroll();
-        };      
-    });
+    if (
+      target.classList.contains("popup-close") ||
+      target.classList.contains("popup__inner")
+    ) {
+      const popup = closestItemByClass(target, "popup");
+      closePopup(popup);
+      toggleScroll();
+    }
+  });
 })();
 
 //==========link scroll=======================
-; (function () {
-    const body = document.querySelector("body");
+(function () {
+  const body = document.querySelector("body");
 
-    let closestAttr = (item, attr) => {
-        let node = item;
-        while (node) {
-            let attrValue = node.getAttribute(attr);
-            if (attrValue) {
-                return attrValue;
-            };
+  let closestAttr = (item, attr) => {
+    let node = item;
+    while (node) {
+      let attrValue = node.getAttribute(attr);
+      if (attrValue) {
+        return attrValue;
+      }
 
-            node = node.parentElement;
-        };
-        return null;
-    };
-
-    const scroll = (target) => {
-        const targetTop = target.getBoundingClientRect().top;
-        const scrollTop = window.pageYOffset;
-        const targetOffsetTop = targetTop + scrollTop;
-        const headerOffset = document.querySelector(".header").clientHeight;
-
-        window.scrollTo(0, targetOffsetTop - headerOffset);
+      node = node.parentElement;
     }
-    
-    body.addEventListener("click", (e) => {
-        const target = e.target;
-        const scrollToItemClass = closestAttr(target, "data-scroll-to");
-        if (scrollToItemClass === null) {
-            return;
-        }
-        e.preventDefault();
-        const scrollToItem = document.querySelector(`.${scrollToItemClass}`);
-        if (scrollToItem) {
-            scroll(scrollToItem);
-        }
-    })
+    return null;
+  };
+
+  const scroll = (target) => {
+    const targetTop = target.getBoundingClientRect().top;
+    const scrollTop = window.pageYOffset;
+    const targetOffsetTop = targetTop + scrollTop;
+    const headerOffset = document.querySelector(".header").clientHeight;
+
+    window.scrollTo(0, targetOffsetTop - headerOffset);
+  };
+
+  body.addEventListener("click", (e) => {
+    const target = e.target;
+    const scrollToItemClass = closestAttr(target, "data-scroll-to");
+    if (scrollToItemClass === null) {
+      return;
+    }
+    e.preventDefault();
+    const scrollToItem = document.querySelector(`.${scrollToItemClass}`);
+    if (scrollToItem) {
+      scroll(scrollToItem);
+    }
+  });
 })();
 
-; (function () {
+//===========products json parse============
+
+(function () {
   getProducts();
+  let productsArray=[];
 
-async function getProducts() {
-  const response = await fetch("./js/products.json");
-  const productsArray = await response.json();
-  renderProducts(productsArray);
-}
+  const productsContainer = document.querySelector(".products__items");
 
-function renderProducts(productsArray) {
-  productsArray.forEach(function (item) {
-    const productHTML = `
-    <div class="products__item ">
-    <div class="products__wrapper card" data-id="${item.id}">
-      <img class="product-img" src="img/roll/${item.imgSrc}" alt="">
+  async function getProducts() {
+    const response = await fetch("./js/products.json");
+    productsArray = await response.json();
+    renderProducts(productsContainer, productsArray);
+  }
+
+  const removeChild = (item) => {
+    while(item.firstChild) {
+      item.removeChild(item.firstChild);
+    };
+  };
+
+  const renderProducts = (container, productsArray) => {
+    removeChild(container);
+    productsArray.forEach(function (item) {
+      const productHTML = `
+    <div class="products__item" data-category="${item.data}">
+      <div class="products__wrapper card" data-id="${item.id}">
+        <img class="product-img" src="img/roll/${item.imgSrc}" alt="">
       <div class="card__body text-center">
         <h4 class="item-title">${item.title}</h4>
         <p><small data-items-in-box class="text-muted">${item.itemsInBox} шт.</small></p>
@@ -178,62 +190,81 @@ function renderProducts(productsArray) {
     </div>
   </div>
     `;
-    productsContainer.insertAdjacentHTML("beforeend", productHTML);
-  });
-  };
+      container.insertAdjacentHTML("beforeend", productHTML);
+    });
+  }
 
-  const products = document.querySelector(".products__items");
-  const productsNav = document.querySelector(".products__nav");
-  const productsNavItems = document.querySelectorAll(".products__li");
+  const productsList = document.querySelector(".products__list");
+  
 
-  productsNav.addEventListener("click", (e) => {
+  productsList.addEventListener("click", (e) => {
     const target = e.target;
+    const productsItems = JSON.parse(JSON.stringify(productsArray));
+    const closestItemByClass = (item, className) => {
+      let node = item;
+      while (node) {
+        if (node.classList.contains(className)) {
+          return node;
+        }
+
+        node = node.parentElement;
+      }
+      return null;
+    };
+
+    let item = closestItemByClass(target, "products__btn");
+
+    if (item === null || item.classList.contains("is--active")) {
+      return;
+    }
+
+    e.preventDefault();
+
+    let filterValue = item.getAttribute("data-filter");
+    let previousBtnActive = productsList.querySelector(
+      ".products__btn.is--active"
+    );
+
+    previousBtnActive.classList.remove("is--active");
+    item.classList.add("is--active");
+
+    if (filterValue === "all") {
+      renderProducts(productsContainer, productsItems);
+      return;
+    }
+
+    let filterdItems = [];
+    for (let i = 0; i < productsItems.length; i++) {
+      let currentItem = productsItems[i];
+      if (currentItem.data === filterValue) {
+        console.log(currentItem);
+        filterdItems.push(currentItem);
+      };
+    };
+    renderProducts(productsContainer, filterdItems);
     
-  })
-
-
+  });
 })();
-
-
-
 
 //================logic=========================
 
-const burger = document.querySelector(".burger");
+// const burger = document.querySelector(".burger");
 const order = document.querySelector(".order");
-const close = document.querySelector(".menu__close");
-const closeOrder = document.querySelector(".menuOrder__close");
-const menu = document.querySelector(".menu");
-const popup = document.querySelector(".popup");
-const menuOrder = document.querySelector(".menu__order");
+// const close = document.querySelector(".menu__close");
+// const closeOrder = document.querySelector(".menuOrder__close");
+// const menu = document.querySelector(".menu");
+// const popup = document.querySelector(".popup");
+// const menuOrder = document.querySelector(".menu__order");
 const orderTotal = document.querySelector(".order__total-price");
 const cartWrapper = document.querySelector(".cart-wrapper");
 const orderWrapper = document.querySelector(".order__list");
-const orderBtn = document.querySelector(".order__btn");
-const productsContainer = document.querySelector(".products__items");
+// const orderBtn = document.querySelector(".order__btn");
+// const productsContainer = document.querySelector(".products__items");
 
 let cart = [];
 
-// burger.addEventListener("click", () => {
-//   menu.classList.add("menu--visible");
-// });
-
-// orderBtn.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   menuOrder.classList.remove("menu__order--visible");
-//   popup.classList.remove("popup--hide");
-//   cartWrapper.innerHTML = "";
-//   calcCartPrice();
-// });
-
-// close.addEventListener("click", () => {
-//   menu.classList.remove("menu--visible");
-//   popup.classList.add("popup--hide");
-// });
-
 order.addEventListener("click", () => {
-  
-  cart.forEach((item) => {  
+  cart.forEach((item) => {
     const cartItemHTML = `
             <div class="cart-item order__item" data-category="${item.data}" data-id="${item.id}">
                     <div class="cart-item__img order__img">
@@ -255,57 +286,6 @@ order.addEventListener("click", () => {
   });
 });
 
-//====закрытие окна заказа======
-// closeOrder.addEventListener("click", () => {
-//   menuOrder.classList.remove("menu__order--visible");
-//   orderWrapper.innerHTML = "";
-//   orderTotal.innerHTML = "";
-// });
-
-//======card=======
-
-
-
-// getProducts();
-
-// async function getProducts() {
-//   const response = await fetch("./js/products.json");
-//   const productsArray = await response.json();
-//   renderProducts(productsArray);
-// }
-
-// function renderProducts(productsArray) {
-//   productsArray.forEach(function (item) {
-//     const productHTML = `
-//     <div class="products__item ">
-//     <div class="products__wrapper card" data-id="${item.id}">
-//       <img class="product-img" src="img/roll/${item.imgSrc}" alt="">
-//       <div class="card__body text-center">
-//         <h4 class="item-title">${item.title}</h4>
-//         <p><small data-items-in-box class="text-muted">6 шт.</small></p>
-
-//         <div class="details-wrapper">
-//           <div class="items counter-wrapper">
-//             <div class="items__control" data-action="minus">-</div>
-//             <div class="items__current" data-counter>1</div>
-//             <div class="items__control" data-action="plus">+</div>
-//           </div>
-
-//           <div class="price">
-//             <div class="price__weight">${item.weight}г.</div>
-//             <div class="price__currency">${item.price} ₽</div>
-//           </div>
-//         </div>
-
-//         <button data-cart type="button" class="btn btn-block btn-outline-warning">+ в корзину</button>
-
-//       </div>
-//     </div>
-//   </div>
-//     `;
-//     productsContainer.insertAdjacentHTML("beforeend", productHTML);
-//   });
-// }
 
 function toggleCartStatus() {
   const cartWrapper = document.querySelector(".products__cart");
@@ -327,10 +307,8 @@ function calcCartPrice() {
   const cartItems = document.querySelectorAll(".cart-item");
   const deliveryCost = document.querySelector(".delivery-cost");
   const cartDelivery = document.querySelector("[data-cart-delivery]");
- 
-  let totalPrice = 0;
 
-  
+  let totalPrice = 0;
 
   cartItems.forEach(function (item) {
     const amountEl = item.querySelector("[data-counter]");
@@ -364,11 +342,11 @@ function calcCartPrice() {
 window.addEventListener("click", function (event) {
   // обьявляем переменную для счетчика
   let counter;
-  let productId; 
+  let productId;
   if (event.target.closest(".cart-wrapper")) {
     productId = event.target.closest(".cart-item").dataset.id;
-  }; 
-  
+  }
+
   if (
     event.target.dataset.action === "plus" ||
     event.target.dataset.action === "minus"
@@ -384,8 +362,7 @@ window.addEventListener("click", function (event) {
     cart.map((item) => {
       if (item.id === productId) {
         item.counter++;
-        console.log(cart);
-      };
+      }
     });
   }
   // проверка что клик был совершен по кнопке минус
@@ -397,7 +374,7 @@ window.addEventListener("click", function (event) {
       cart.map((item) => {
         if (item.id === productId) {
           item.counter--;
-        };
+        }
       });
     } else if (
       event.target.closest(".cart-wrapper") &&
@@ -408,7 +385,7 @@ window.addEventListener("click", function (event) {
         if (item.id === productId) {
           cart.splice(index, 1);
         }
-      })
+      });
 
       toggleCartStatus();
       // пересчет общей стоимости товаров в корзине
@@ -424,8 +401,6 @@ window.addEventListener("click", function (event) {
     calcCartPrice();
   }
 });
-
-
 
 window.addEventListener("click", function (event) {
   // проверяем что  клик по кнопке добавить в карзину
@@ -444,16 +419,17 @@ window.addEventListener("click", function (event) {
     };
 
     cart.push(productInfo);
-    
+
     // проверяем есть ли такой товар в корзине
-    const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
-   
+    const itemInCart = cartWrapper.querySelector(
+      `[data-id="${productInfo.id}"]`
+    );
+
     // если товар в корзине плюсуем количество
     if (itemInCart) {
       const counterEl = itemInCart.querySelector("[data-counter]");
-      counterEl.innerText = parseInt(counterEl.innerText) + parseInt(productInfo.counter);
-     
-     
+      counterEl.innerText =
+        parseInt(counterEl.innerText) + parseInt(productInfo.counter);
     } else {
       //если товара нет в корзине
 
@@ -493,7 +469,6 @@ window.addEventListener("click", function (event) {
   }
 });
 
-
 //=======yadex_maps=========
 
 //============ geoObject ==================
@@ -505,11 +480,10 @@ function init() {
     zoom: 12,
   });
 
-
   var address = document.querySelector("#myadress").innerHTML;
 
   var geocoder = ymaps.geocode(address);
- 
+
   geocoder.then(function (res) {
     var coordinates = res.geoObjects.get(0).geometry.getCoordinates();
     myMap.setCenter(coordinates, 14, {
@@ -522,11 +496,11 @@ function init() {
         balloonContent: "Время работы: Пн-Пт, с 9 до 20",
       },
       {
-        iconLayout: 'default#image',
-        iconImageHref: '../img/icon.svg',
+        iconLayout: "default#image",
+        iconImageHref: "../img/icon.svg",
         iconImageSize: [40, 52],
-        iconImageOffset: [-5, -38]
-    },
+        iconImageOffset: [-5, -38],
+      },
       {
         preset: "islands#redDotIcon",
       }
@@ -536,5 +510,3 @@ function init() {
   });
 }
 //====================/yandexMaps=======================
-
-

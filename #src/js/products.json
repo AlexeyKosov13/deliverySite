@@ -62,7 +62,7 @@
         "imgSrc":"bonito.jpg" 
     },
     {   
-        "id": 7,
+        "id": 8,
         "data": "gukan",
         "title": "Спайси сяке гункан",
         "itemsInBox": 1,
@@ -71,7 +71,7 @@
         "imgSrc":"spicy-sake.jpg" 
     },
     {   
-        "id": 8,
+        "id": 9,
         "data": "gukan",
         "title": "Чука",
         "itemsInBox": 1,
@@ -80,7 +80,7 @@
         "imgSrc":"chuka.jpg" 
     },
     {   
-        "id": 9,
+        "id": 10,
         "data": "gukan",
         "title": "Икура",
         "itemsInBox": 1,
@@ -89,7 +89,7 @@
         "imgSrc":"ikura.jpg" 
     },
     {   
-        "id": 10,
+        "id": 11,
         "data": "gukan",
         "title": "Тори унаги",
         "itemsInBox": 1,
@@ -98,7 +98,7 @@
         "imgSrc":"tori.jpg" 
     },
     {   
-        "id": 11,
+        "id": 12,
         "data": "pizza",
         "title": "Марагрита",
         "itemsInBox": 1,
@@ -107,7 +107,7 @@
         "imgSrc":"margarita.jpg" 
     },
     {   
-        "id": 12,
+        "id": 13,
         "data": "pizza",
         "title": "Барбекю",
         "itemsInBox": 1,
@@ -116,7 +116,7 @@
         "imgSrc":"barbekue.jpg" 
     },
     {   
-        "id": 13,
+        "id": 14,
         "data": "pizza",
         "title": "Баварская",
         "itemsInBox": 1,
@@ -125,7 +125,7 @@
         "imgSrc":"bavaria.jpg" 
     },
     {   
-        "id": 14,
+        "id": 15,
         "data": "pizza",
         "title": "Пепперони",
         "itemsInBox": 1,
